@@ -1,0 +1,17 @@
+Let's look at a function `printMove`, which takes a Pokemon string, followed by a move string. It then produces a message describing the action.
+
+This function appears to have two inputs, but there is a something peculiar about Haskell functions: they all take only one!
+
+This means `printMove` actually has just one argument: the Pokemon string. And it doesn't return the final action message: it actually returns a new function!
+
+Let's call the new function `printMove` returns once the Pokemon string is applied `printMoveForPokemon`.
+
+`printMoveForPokemon` also takes a single argument: the move string. This function is what returns our final message string, once the move string is applied.
+
+All Haskell functions that process multiple inputs work this way, and are referred to as "curried" functions.
+
+Currying simulates multi-argument functions by breaking a single function into one or more intermediate functions, each accepting a single argument.
+
+Beneath what appears to be a single function with multiple arguments is actually multiple functions at work!
+
+We'll learn why Haskell works this way and the benefits of currying later on in our course.

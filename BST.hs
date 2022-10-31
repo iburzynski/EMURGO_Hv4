@@ -1,6 +1,20 @@
 import Data.Foldable (toList, foldl')
 
 data Tree a = Empty | Node (Tree a) a (Tree a) deriving (Eq, Show)
+-- a Tree can contain data of any one type...
+-- and is either Empty or a Node consisting of:
+--   * a left branch (type Tree a)
+--   * a value (type a)
+--   * a right branch (type Tree a)
+
+myTree =
+  Node (Node (Node Empty 3 Empty) 1 (Node Empty 5 Empty)) 0 (Node (Node Empty 4 Empty) 2 (Node Empty 6 Empty))
+
+--       0
+--     /   \
+--    1     2
+--   / \   / \
+--  3   5 4   6
 
 -- *** Challenge Exercise: "Folds within Folds" ***
 -- Define a Foldable instance for your binary search tree by implementing `foldr`.

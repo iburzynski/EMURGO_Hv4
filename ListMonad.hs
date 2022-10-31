@@ -285,10 +285,6 @@ makeBoards t b
 --                                          loops.
 
 --                [ fillIndex t b i j | i <- [0 .. 2], j <- [0 .. 2], isEmpty b i j]
---                                      ^ Generators come next and behave just like in do-notation,
---                                          but are separated by commas instead of newlines.
-
---                [ fillIndex t b i j | i <- [0 .. 2], j <- [0 .. 2], isEmpty b i j]
 --                                                                    ^ Predicates can be added to
 --                                                                      filter out undesired results
 

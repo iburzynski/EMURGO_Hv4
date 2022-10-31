@@ -46,10 +46,10 @@ maybeVal2 = Just "in the category of endofunctors"
   --           ^ `fmap` must receive an ordinary function, not a function in a context!
 
 -- How can we solve this type mismatch without resorting to repetitive DIY functions again?
--- Don't worry - there's an "app" for that!
+-- Don't worry - there's an "ap" for that!
 -- (<*>) :: f (a -> b) -> f a -> f b
--- Note the similarity to the (<$>) operator (ordinary function application):
--- (<$>) ::   (a -> b) ->   a ->   b
+-- Note the similarity to the ($) operator (ordinary function application):
+-- ($)   ::   (a -> b) ->   a ->   b
 -- This is why we call these functors "applicatives": they support application within a context
 
 -- Ordinary function application:
@@ -70,7 +70,7 @@ appendMaybes    = ((++)     <$> maybeVal1) <*> maybeVal2 -- extra parens added f
 -- Any time we use `fmap` to partially apply a function to some argument in a context, we receive a
 --  function in that context, so we need a special "adapter" to continue applying it to arguments.
 
--- The Applicative "app" operator (<*>) allows us to chain together any number of arguments in a
+-- The Applicative "ap" operator (<*>) allows us to chain together any number of arguments in a
 --   context, which means we can sequence an arbitrary number of computations using existing
 --   functions instead of creating redundant custom functions.
 
@@ -125,11 +125,6 @@ fullNameMaybe = FullName <$> Just "Ian" <*> Just "T." <*> Just "Burzynski"
 -- Now we will create our own version of the built-in List type from scratch and make it an Applicative:
 data List a = Empty | Cons a (List a)
 
--- Or, using record syntax:
--- data List a = Empty | Cons { getHead :: a
---                            , getTail :: List a
---                            }
-
 -- Built-in List equivalents:
 -- Empty == []
 -- Cons 1 (Cons 2 (Cons 3 Empty)) == [1, 2, 3]
@@ -153,9 +148,6 @@ instance Functor List where
   fmap f (Cons x xs) = Cons (f x) (fmap f xs)
   -- Built-in List equivalent:
   -- fmap f (x:xs)   = (:)  (f x) (fmap f xs)
-
-  -- Alternative version if we defined List using record syntax:
-  -- fmap f (Cons x xs) = Cons { getHead = f x, getTail = fmap f xs }
 
 instance Applicative List where
   pure :: a -> List a

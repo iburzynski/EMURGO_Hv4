@@ -1,0 +1,69 @@
+Consider the sequence of values [2, 7, 4, 17].
+
+Each value is an `Int`, but the entire sequence is also a value: a list of `Int` elements.
+
+We write `[2, 7, 4, 17] :: [Int]` to represent its type.
+
+We can also have a list of `Char` values, like `['w', 'o', 'r', 'l', 'd']`.
+
+Its type is written `['w', 'o', 'r', 'l', 'd'] :: [Char]`.
+
+A list of `Char` values is also called a `String`, so we can write `:: String` in place of `:: [Char]`.
+
+Haskell has a shorter way to represent `String` values using double quotes.
+
+`['w', 'o', 'r', 'l', 'd']` can be written as `"world"`.
+
+In fact, there are as many different List types as there are types of data.
+
+This is because List is a parametric type, which acts like a template for producing other types.
+
+Since List is just a template, we can put values of any type inside.
+
+But all elements in a list must have the same type. We can't have a list with `Int`, `Char`, and `Bool` values inside it.
+
+To show that a list can have values of any one type, we write `[a]`.
+
+`a` is called a type variable, and can represent any type like `Int`, `Char`, or `Bool`.
+
+When we define a list, the `a` in the template becomes the type of its elements, like `[Int]`, `[Char]`, or `[Bool]`.
+
+Tuples also contain multiple values like lists, but they have fixed lengths and can contain values of differing types.
+
+Here is a tuple value `(2, 'a')` of type `(Int, Char)`.
+
+Here is another tuple value `("seven", 17, false)` of type `(String, Int, Bool)`.
+
+Tuples are parametric types like List.
+
+Each tuple is a template for producing a collection type that has a particular shape.
+
+A 2-tuple can contain any two values.
+
+Its template is represented as `(a, b)`, where `a` and `b` are type variables.
+
+A 3-tuple can contain any three values and is represented as `(a, b, c)`.
+
+So far we've constructed values by simply defining them ourselves.
+
+Functions let us automate the production of new values from existing ones.
+
+We can think of a function as a machine that takes some value as an input and returns some new value as an output.
+
+Consider the function `square`: it takes an `Int` value and returns a new `Int` value, which is the square of the input value.
+
+(2 -> 4, 7 -> 49, -4 -> 16)
+
+This function, `length`, takes a `String` value as an input and returns its length as an `Int` value.
+
+("Pikachu" -> 7, "Squirtle" -> 8", "Charizard" -> 9)
+
+Just like collections of values are also values in Haskell, functions are values too.
+
+This means every function has a unique type.
+
+To describe the type of a function, we put an arrow between the type of its input and the type of its output.
+
+To describe the type of the `square` function, we say `square :: Int -> Int`.
+
+The type of `length` is `length :: String -> String`.

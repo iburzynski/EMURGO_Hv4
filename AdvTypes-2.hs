@@ -5,7 +5,7 @@ import Data.List (sort)
 -- We can reimplement the built-in list type to further understand polymorphic/parametrized types
 -- and also demonstrate how types can be recursive:
 
-data List a = Empty | Cons a   (List a)
+data List a = Empty | Cons a (List a)
   deriving (Eq)
 -- data [] a = []   |      a : [] a
 --        ^ List is a parameterized type that can contain data of any one type
@@ -18,25 +18,6 @@ data List a = Empty | Cons a   (List a)
 empty = Empty
 hey = Cons 'h' (Cons 'e' (Cons 'y' Empty))
 --         'h' : ('e' : ('y' : []))
-
--- Another recursive data structure we can implement is a binary tree:
-data Tree a = Leaf | Node (Tree a) a (Tree a)
-  deriving (Show, Read)
--- "GHC, please implement a Show instance for type Tree (define `show` method for Tree)"
--- a Tree can contain data of any one type...
--- and is either a Leaf or a Node consisting of:
---   * a left branch (type Tree a)
---   * a value (type a)
---   * a right branch (type Tree a)
-
-myTree =
-  Node (Node (Node Leaf 3 Leaf) 1 (Node Leaf 5 Leaf)) 0 (Node (Node Leaf 4 Leaf) 2 (Node Leaf 6 Leaf))
-
---       0
---     /   \
---    1     2
---   / \   / \
---  3   5 4   6
 
 -- *** Typeclasses:
 -- Allow us to define polymorphic functions with different implementations for different types
@@ -72,13 +53,17 @@ instance Show a => Show (List a) where
       showList False (Cons x xs)    = show x ++ ", " ++ showList False xs
 
 myList = Cons 1 (Cons 2 (Cons 3 Empty))
+-- [1, 2, 3]
+-- "Cons 1 (Cons 2 (Cons 3 Empty))"
 
 -- *** Derived & Manual Instances
 type FirstName = String
 type LastName  = String
 
 newtype Name = Name (FirstName, LastName)
-  deriving (Show, Eq)
+  deriving (Show, Eq, Ord)
+
+ex = Name ("Matthew", "Burzynski") == Name ("Matthew", "Lansing")
 
 -- instance Eq Name where
 --   (==) (Name (f1, l1)) (Name (f2, l2)) = f1 == f2 && l1 == l2
@@ -90,8 +75,8 @@ names = sort [ Name ("Philip", "Wadler")
              , Name ("Jeremy", "Wood")]
 
 -- To sort Names by last name first, we can define our own Ord instance implementing `compare`:
-instance Ord Name where
-  compare (Name (f1, l1)) (Name (f2, l2)) = compare (l1, f1) (l2, f2)
+-- instance Ord Name where
+--   compare (Name (f1, l1)) (Name (f2, l2)) = compare (l1, f1) (l2, f2)
 
 data D6 = S1 | S2 | S3 | S4 | S5 | S6
   deriving (Show, Eq, Ord, Bounded)

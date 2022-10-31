@@ -1,0 +1,25 @@
+The Haskell universe is populated with values.
+
+Values are the most fundamental building blocks of our programs.
+
+`2` is a value, `'a'` is a value, and `True` is a value.
+
+A type is a collection of similar values.
+
+For example, `2` is value of type `Int`, just like `7` or `11` or `-37`.
+
+To show that `2` has type `Int`, we write `2 :: Int`.
+
+The `::` can be read as "is a", so we can say `2` is an `Int`.
+
+`Char` is a type which represents characters, like `'A'`, `'z'`, `'3'`, , or `'@'`.
+
+We write `'a' :: Char` to show that `'a'` is a value of type `Char`.
+
+`Bool` is the type which represents booleans.
+
+`True` and `False` are the only values which have type `Bool`.
+
+An important aspect of values and types in Haskell is that every value has a unique type.
+
+No value in Haskell has more than one type, so if `'a'` is a `Char`, it cannot be anything else.

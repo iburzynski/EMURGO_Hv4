@@ -1,0 +1,41 @@
+Fold is another higher-order function that produces a summary value from a list.
+
+It takes a function, which we call a "reducer", an initial value of type `b`, and a list of type [a], which it processes by repeatedly applying the reducer.
+
+Foldr, the variant of fold we're considering here, has a reducer with type (a -> b -> b).
+
+It consumes a list element of type `a` and a value of type `b`, and returns a new value of type `b`.
+
+Foldr starts from the right end of the list, and applies the reducer to the last element and the initial value.
+
+This value, along with the preceding element in the list, will become the next arguments to the reducer, and this process continues until we've exhausted the list.
+
+Then, the value of type b from the last call to the reducer is returned as the overall result of foldr.
+
+Let's see how foldr works through a function, countWaterPokemon, which counts the number of water Pokemon in a list.
+
+First, let's determine the initial value of the count. It's clear we should start counting from zero, so the initial value should be 0.
+
+Next, we need to define the reducer. Let's start by understanding its type.
+
+We know we're processing a list of Pokemon and we have to produce a value of type Int as a result. So, `a` will be Pokemon, and `b` will be Int.
+
+Now we're ready to implement it.
+
+Given a Pokemon `p` and a previous count `n`, we need to determine what to return as a new count.
+
+We'll assume we already have a helper function, isWaterPokemon, which checks whether a Pokemon is a water Pokemon.
+
+We'll apply this to the Pokemon being processed, and return a new count value based on its result.
+
+Charmander is not a water Pokemon, so naturally the count should not increase. The reducer should return the same value of n which it received as input.
+
+We see that the next Pokemon is Magikarp, which is a water Pokemon. So, the value returned by the reducer should equal n + 1 instead of n.
+
+We continue this way until we've exhausted the Pokemon in the list. The count we have at the end will be the number of water Pokemon.
+
+Foldl is another variant of fold, which processes the list from the beginning rather than the end.
+
+The order of its reducer's arguments is also flipped, so it has type (b -> a -> b).
+
+There are also significant differences in the behavior of foldr and foldl that we'll explore in detail during class.
